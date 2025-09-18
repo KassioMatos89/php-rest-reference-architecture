@@ -303,4 +303,78 @@ class ExampleCrudRest
         $exampleCrudRepo->save($model);
     }
 
+    /**
+     * Update an existing ExampleCrud status
+     *
+     * @param HttpResponse $response
+     * @param HttpRequest $request
+     * @return void
+     * @throws Error401Exception
+     * @throws Error404Exception
+     * @throws ConfigException
+     * @throws ConfigNotFoundException
+     * @throws DependencyInjectionException
+     * @throws InvalidDateException
+     * @throws KeyNotFoundException
+     * @throws InvalidArgumentException
+     * @throws OrmBeforeInvalidException
+     * @throws OrmInvalidFieldsException
+     * @throws Error400Exception
+     * @throws Error403Exception
+     * @throws \ByJG\Serializer\Exception\InvalidArgumentException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws ReflectionException
+     */
+    #[OA\Put(
+        path: "/example/crud/status",
+        description: "Update the status of the ExampleCrud",
+        security: [
+            ["jwt-token" => []]
+        ],
+        tags: ["Example"]
+    )]
+    #[OA\RequestBody(
+        description: "The status to be updated",
+        required: true,
+        content: new OA\JsonContent(
+            required: ["status"],
+            properties: [
+                new OA\Property(property: "id", type: "integer", format: "int32"),
+                new OA\Property(property: "status", type: "string")
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: "The operation result",
+        content: new OA\JsonContent(
+            required: ["result"],
+            properties: [
+                new OA\Property(property: "result", type: "string")
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 401,
+        description: "Not Authorized",
+        content: new OA\JsonContent(ref: "#/components/schemas/error")
+    )]
+    public function putExampleCrudStatus(HttpResponse $response, HttpRequest $request): void
+    {
+        JwtContext::requireRole($request, User::ROLE_ADMIN);
+
+        $payload = OpenApiContext::validateRequest($request);
+
+        $exampleCrudRepo = Psr11::get(ExampleCrudRepository::class);
+        $model = $exampleCrudRepo->get($payload['id']);
+        if (empty($model)) {
+            throw new Error404Exception('Id not found');
+        }
+        $model->setStatus($payload["status"]);
+        $exampleCrudRepo->save($model);
+
+        $response->write([
+            "result" => "ok"
+        ]);
+    }
 }

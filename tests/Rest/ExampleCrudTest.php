@@ -5,6 +5,8 @@ namespace Test\Rest;
 use ByJG\RestServer\Exception\Error401Exception;
 use ByJG\RestServer\Exception\Error403Exception;
 use ByJG\Serializer\ObjectCopy;
+use Tutorial\Psr11;
+use Tutorial\Repository\ExampleCrudRepository;
 use Tutorial\Util\FakeApiRequester;
 use Tutorial\Model\ExampleCrud;
 use Tutorial\Repository\BaseRepository;
@@ -202,5 +204,42 @@ class ExampleCrudTest extends BaseApiTestCase
             ])
         ;
         $this->assertRequest($request);
+    }
+
+    public function testUpdateStatus()
+    {
+        $authResult = json_decode(
+            $this->assertRequest(Credentials::requestLogin(Credentials::getAdminUser()))
+                ->getBody()
+                ->getContents(),
+            true
+        );
+
+        $recordId = 1;
+        $newStatus = 'new status';
+
+        // Create mock API request
+        $request = new FakeApiRequester();
+        $request
+            ->withPsr7Request($this->getPsr7Request())
+            ->withMethod('PUT')
+            ->withPath("/example/crud/status")
+            ->withRequestBody(json_encode([
+                'id' => $recordId,
+                'status' => $newStatus
+            ]))
+            ->withRequestHeader([
+                "Authorization" => "Bearer " . $authResult['token'],
+                "Content-Type" => "application/json"
+            ])
+            ->assertResponseCode(200);
+
+        // Execute the request and get response
+        $this->assertRequest($request);
+
+        // Verify the database was updated correctly
+        $repository = Psr11::get(ExampleCrudRepository::class);
+        $updatedRecord = $repository->get($recordId);
+        $this->assertEquals($newStatus, $updatedRecord->getStatus());
     }
 }
