@@ -1,6 +1,6 @@
 <?php
 
-namespace RestReferenceArchitecture;
+namespace Tutorial;
 
 use ByJG\Cache\Psr16\FileSystemCacheEngine;
 use ByJG\Config\Container;

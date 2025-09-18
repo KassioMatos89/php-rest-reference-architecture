@@ -1,13 +1,13 @@
 <?php
 
-namespace RestReferenceArchitecture\Repository;
+namespace Tutorial\Repository;
 
 use ByJG\AnyDataset\Db\DbDriverInterface;
 use ByJG\MicroOrm\Exception\OrmModelInvalidException;
 use ByJG\MicroOrm\Query;
 use ByJG\MicroOrm\Repository;
 use ReflectionException;
-use RestReferenceArchitecture\Model\Dummy;
+use Tutorial\Model\Dummy;
 
 class DummyRepository extends BaseRepository
 {

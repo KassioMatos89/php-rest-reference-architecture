@@ -1,6 +1,6 @@
 <?php
 
-namespace RestReferenceArchitecture\Util;
+namespace Tutorial\Util;
 
 use ByJG\ApiTools\Base\Schema;
 use ByJG\Config\Exception\ConfigException;
@@ -14,7 +14,7 @@ use ByJG\Serializer\Serialize;
 use Exception;
 use Psr\SimpleCache\InvalidArgumentException;
 use ReflectionException;
-use RestReferenceArchitecture\Psr11;
+use Tutorial\Psr11;
 
 class OpenApiContext
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace RestReferenceArchitecture\Repository;
+namespace Tutorial\Repository;
 
 use ByJG\AnyDataset\Db\DbDriverInterface;
 use ByJG\Authenticate\Model\UserModel;
 use ByJG\MicroOrm\Literal\HexUuidLiteral;
 use ByJG\MicroOrm\Literal\Literal;
-use RestReferenceArchitecture\Psr11;
+use Tutorial\Psr11;
 
 class UserDefinition extends \ByJG\Authenticate\Definition\UserDefinition
 {

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace RestReferenceArchitecture\Util;
+namespace Tutorial\Util;
 
 use ByJG\ApiTools\AbstractRequester;
 use ByJG\Config\Exception\ConfigException;
@@ -24,7 +24,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\InvalidArgumentException;
 use ReflectionException;
-use RestReferenceArchitecture\Psr11;
+use Tutorial\Psr11;
 
 
 /**

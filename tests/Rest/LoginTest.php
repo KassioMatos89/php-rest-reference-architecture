@@ -5,9 +5,9 @@ namespace Test\Rest;
 use ByJG\Authenticate\UsersDBDataset;
 use ByJG\RestServer\Exception\Error401Exception;
 use ByJG\RestServer\Exception\Error422Exception;
-use RestReferenceArchitecture\Model\User;
-use RestReferenceArchitecture\Psr11;
-use RestReferenceArchitecture\Util\FakeApiRequester;
+use Tutorial\Model\User;
+use Tutorial\Psr11;
+use Tutorial\Util\FakeApiRequester;
 
 /**
  * Create a TestCase inherited from SwaggerTestCase

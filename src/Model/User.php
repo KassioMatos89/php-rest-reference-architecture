@@ -1,6 +1,6 @@
 <?php
 
-namespace RestReferenceArchitecture\Model;
+namespace Tutorial\Model;
 
 use ByJG\Authenticate\Definition\PasswordDefinition;
 use ByJG\Authenticate\Model\UserModel;
@@ -10,7 +10,7 @@ use ByJG\MicroOrm\Literal\HexUuidLiteral;
 use Exception;
 use InvalidArgumentException;
 use OpenApi\Attributes as OA;
-use RestReferenceArchitecture\Psr11;
+use Tutorial\Psr11;
 
 #[TableAttribute("users")]
 #[OA\Schema(required: ["email"], type: "object", xml: new OA\Xml(name: "User"))]

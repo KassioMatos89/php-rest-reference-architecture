@@ -4,8 +4,8 @@ namespace Test\Rest;
 
 use ByJG\Util\Uri;
 use ByJG\WebRequest\Psr7\Request;
-use RestReferenceArchitecture\Psr11;
-use RestReferenceArchitecture\Util\FakeApiRequester;
+use Tutorial\Psr11;
+use Tutorial\Util\FakeApiRequester;
 
 class Credentials
 {

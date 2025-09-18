@@ -19,17 +19,17 @@ use ByJG\RestServer\HttpResponse;
 use ByJG\Serializer\ObjectCopy;
 use OpenApi\Attributes as OA;
 use ReflectionException;
-use Tutorial\Model\Dummy;
-use Tutorial\Model\User;
+use Tutorial\Model\ExampleCrud;
 use Tutorial\Psr11;
-use Tutorial\Repository\DummyRepository;
+use Tutorial\Repository\ExampleCrudRepository;
+use Tutorial\Model\User;
 use Tutorial\Util\JwtContext;
 use Tutorial\Util\OpenApiContext;
 
-class DummyRest
+class ExampleCrudRest
 {
     /**
-     * Get the Dummy by id
+     * Get the ExampleCrud by id
      *
      * @param HttpResponse $response
      * @param HttpRequest $request
@@ -46,11 +46,11 @@ class DummyRest
      * @throws ReflectionException
      */
     #[OA\Get(
-        path: "/dummy/{id}",
+        path: "/example/crud/{id}",
         security: [
             ["jwt-token" => []]
         ],
-        tags: ["Dummy"],
+        tags: ["Example"],
     )]
     #[OA\Parameter(
         name: "id",
@@ -63,17 +63,17 @@ class DummyRest
     )]
     #[OA\Response(
         response: 200,
-        description: "The object Dummy",
-        content: new OA\JsonContent(ref: "#/components/schemas/Dummy")
+        description: "The object ExampleCrud",
+        content: new OA\JsonContent(ref: "#/components/schemas/ExampleCrud")
     )]
-    public function getDummy(HttpResponse $response, HttpRequest $request): void
+    public function getExampleCrud(HttpResponse $response, HttpRequest $request): void
     {
         JwtContext::requireAuthenticated($request);
 
-        $dummyRepo = Psr11::get(DummyRepository::class);
+        $exampleCrudRepo = Psr11::get(ExampleCrudRepository::class);
         $id = $request->param('id');
 
-        $result = $dummyRepo->get($id);
+        $result = $exampleCrudRepo->get($id);
         if (empty($result)) {
             throw new Error404Exception('Id not found');
         }
@@ -83,7 +83,7 @@ class DummyRest
     }
 
     /**
-     * List Dummy
+     * List ExampleCrud
      *
      * @param mixed $response
      * @param mixed $request
@@ -100,11 +100,11 @@ class DummyRest
      * @throws ReflectionException
      */
     #[OA\Get(
-        path: "/dummy",
+        path: "/example/crud",
         security: [
             ["jwt-token" => []]
         ],
-        tags: ["Dummy"]
+        tags: ["Example"]
     )]
     #[OA\Parameter(
         name: "page",
@@ -144,19 +144,19 @@ class DummyRest
     )]
     #[OA\Response(
         response: 200,
-        description: "The object Dummy",
-        content: new OA\JsonContent(type: "array", items: new OA\Items(ref: "#/components/schemas/Dummy"))
+        description: "The object ExampleCrud",
+        content: new OA\JsonContent(type: "array", items: new OA\Items(ref: "#/components/schemas/ExampleCrud"))
     )]
     #[OA\Response(
         response: 401,
         description: "Not Authorized",
         content: new OA\JsonContent(ref: "#/components/schemas/error")
     )]
-    public function listDummy(HttpResponse $response, HttpRequest $request): void
+    public function listExampleCrud(HttpResponse $response, HttpRequest $request): void
     {
         JwtContext::requireAuthenticated($request);
 
-        $repo = Psr11::get(DummyRepository::class);
+        $repo = Psr11::get(ExampleCrudRepository::class);
 
         $page = $request->get('page');
         $size = $request->get('size');
@@ -171,7 +171,7 @@ class DummyRest
 
 
     /**
-     * Create a new Dummy
+     * Create a new ExampleCrud 
      *
      * @param HttpResponse $response
      * @param HttpRequest $request
@@ -192,20 +192,23 @@ class DummyRest
      * @throws ReflectionException
      */
     #[OA\Post(
-        path: "/dummy",
+        path: "/example/crud",
         security: [
             ["jwt-token" => []]
         ],
-        tags: ["Dummy"]
+        tags: ["Example"]
     )]
     #[OA\RequestBody(
-        description: "The object Dummy to be created",
+        description: "The object ExampleCrud to be created",
         required: true,
         content: new OA\JsonContent(
-            required: [ "field" ],
+            required: [ "name" ],
             properties: [
 
-                new OA\Property(property: "field", type: "string", format: "string")
+                new OA\Property(property: "name", type: "string", format: "string"),
+                new OA\Property(property: "birthdate", type: "string", format: "date-time", nullable: true),
+                new OA\Property(property: "code", type: "integer", format: "int32", nullable: true),
+                new OA\Property(property: "status", type: "string", format: "string", nullable: true)
             ]
         )
     )]
@@ -225,24 +228,24 @@ class DummyRest
         description: "Not Authorized",
         content: new OA\JsonContent(ref: "#/components/schemas/error")
     )]
-    public function postDummy(HttpResponse $response, HttpRequest $request): void
+    public function postExampleCrud(HttpResponse $response, HttpRequest $request): void
     {
         JwtContext::requireRole($request, User::ROLE_ADMIN);
 
         $payload = OpenApiContext::validateRequest($request);
-
-        $model = new Dummy();
+        
+        $model = new ExampleCrud();
         ObjectCopy::copy($payload, $model);
 
-        $dummyRepo = Psr11::get(DummyRepository::class);
-        $dummyRepo->save($model);
+        $exampleCrudRepo = Psr11::get(ExampleCrudRepository::class);
+        $exampleCrudRepo->save($model);
 
         $response->write([ "id" => $model->getId()]);
     }
 
 
     /**
-     * Update an existing Dummy
+     * Update an existing ExampleCrud 
      *
      * @param HttpResponse $response
      * @param HttpRequest $request
@@ -264,16 +267,16 @@ class DummyRest
      * @throws ReflectionException
      */
     #[OA\Put(
-        path: "/dummy",
+        path: "/example/crud",
         security: [
             ["jwt-token" => []]
         ],
-        tags: ["Dummy"]
+        tags: ["Example"]
     )]
     #[OA\RequestBody(
-        description: "The object Dummy to be updated",
+        description: "The object ExampleCrud to be updated",
         required: true,
-        content: new OA\JsonContent(ref: "#/components/schemas/Dummy")
+        content: new OA\JsonContent(ref: "#/components/schemas/ExampleCrud")
     )]
     #[OA\Response(
         response: 200,
@@ -284,20 +287,94 @@ class DummyRest
         description: "Not Authorized",
         content: new OA\JsonContent(ref: "#/components/schemas/error")
     )]
-    public function putDummy(HttpResponse $response, HttpRequest $request): void
+    public function putExampleCrud(HttpResponse $response, HttpRequest $request): void
     {
         JwtContext::requireRole($request, User::ROLE_ADMIN);
 
         $payload = OpenApiContext::validateRequest($request);
 
-        $dummyRepo = Psr11::get(DummyRepository::class);
-        $model = $dummyRepo->get($payload['id']);
+        $exampleCrudRepo = Psr11::get(ExampleCrudRepository::class);
+        $model = $exampleCrudRepo->get($payload['id']);
         if (empty($model)) {
             throw new Error404Exception('Id not found');
         }
         ObjectCopy::copy($payload, $model);
 
-        $dummyRepo->save($model);
+        $exampleCrudRepo->save($model);
     }
 
+    /**
+     * Update an existing ExampleCrud status
+     *
+     * @param HttpResponse $response
+     * @param HttpRequest $request
+     * @return void
+     * @throws Error401Exception
+     * @throws Error404Exception
+     * @throws ConfigException
+     * @throws ConfigNotFoundException
+     * @throws DependencyInjectionException
+     * @throws InvalidDateException
+     * @throws KeyNotFoundException
+     * @throws InvalidArgumentException
+     * @throws OrmBeforeInvalidException
+     * @throws OrmInvalidFieldsException
+     * @throws Error400Exception
+     * @throws Error403Exception
+     * @throws \ByJG\Serializer\Exception\InvalidArgumentException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws ReflectionException
+     */
+    #[OA\Put(
+        path: "/example/crud/status",
+        description: "Update the status of the ExampleCrud",
+        security: [
+            ["jwt-token" => []]
+        ],
+        tags: ["Example"]
+    )]
+    #[OA\RequestBody(
+        description: "The status to be updated",
+        required: true,
+        content: new OA\JsonContent(
+            required: ["status"],
+            properties: [
+                new OA\Property(property: "id", type: "integer", format: "int32"),
+                new OA\Property(property: "status", type: "string")
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: "The operation result",
+        content: new OA\JsonContent(
+            required: ["result"],
+            properties: [
+                new OA\Property(property: "result", type: "string")
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 401,
+        description: "Not Authorized",
+        content: new OA\JsonContent(ref: "#/components/schemas/error")
+    )]
+    public function putExampleCrudStatus(HttpResponse $response, HttpRequest $request): void
+    {
+        JwtContext::requireRole($request, User::ROLE_ADMIN);
+
+        $payload = OpenApiContext::validateRequest($request);
+
+        $exampleCrudRepo = Psr11::get(ExampleCrudRepository::class);
+        $model = $exampleCrudRepo->get($payload['id']);
+        if (empty($model)) {
+            throw new Error404Exception('Id not found');
+        }
+        $model->setStatus($payload["status"]);
+        $exampleCrudRepo->save($model);
+
+        $response->write([
+            "result" => "ok"
+        ]);
+    }
 }

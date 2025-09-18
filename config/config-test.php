@@ -6,7 +6,7 @@ use ByJG\JwtWrapper\JwtKeyInterface;
 
 return [
     JwtKeyInterface::class => DI::bind(JwtHashHmacSecret::class)
-        ->withConstructorArgs(['jwt_super_secret_key'])
+        ->withConstructorArgs(['227C3mTTxIF1lBpjqhap3G3Cdxk606/gCXxKvi21eUNLMEL3uR1ACDRokO/XBGo3aIyl6JEwVXykazqVet8aig=='])
         ->toSingleton(),
 ];
 

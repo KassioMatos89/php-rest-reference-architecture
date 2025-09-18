@@ -19,6 +19,7 @@ use Exception;
 use OpenApi\Generator;
 use Psr\SimpleCache\InvalidArgumentException;
 use ReflectionException;
+use Tutorial\Psr11;
 use RestReferenceArchitecture\Psr11;
 
 class Scripts extends BaseScripts
@@ -319,7 +320,7 @@ class Scripts extends BaseScripts
         }
 
         $data = [
-            'namespace' => 'RestReferenceArchitecture',
+            'namespace' => 'Tutorial',
             'autoIncrement' => $autoIncrement ? 'yes' : 'no',
             'restTag' => ucwords(explode('_', strtolower($table))[0]),
             'restPath' => str_replace('_', '/', strtolower($table)),

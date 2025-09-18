@@ -4,7 +4,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use ByJG\RestServer\HttpRequestHandler;
 use ByJG\RestServer\Route\OpenApiRouteList;
-use RestReferenceArchitecture\Psr11;
+use Tutorial\Psr11;
 
 class App
 {

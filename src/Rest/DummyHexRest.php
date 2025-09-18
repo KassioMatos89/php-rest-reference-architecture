@@ -1,6 +1,6 @@
 <?php
 
-namespace RestReferenceArchitecture\Rest;
+namespace Tutorial\Rest;
 
 use ByJG\Config\Exception\ConfigException;
 use ByJG\Config\Exception\ConfigNotFoundException;
@@ -19,12 +19,12 @@ use ByJG\RestServer\HttpResponse;
 use ByJG\Serializer\ObjectCopy;
 use OpenApi\Attributes as OA;
 use ReflectionException;
-use RestReferenceArchitecture\Model\DummyHex;
-use RestReferenceArchitecture\Model\User;
-use RestReferenceArchitecture\Psr11;
-use RestReferenceArchitecture\Repository\DummyHexRepository;
-use RestReferenceArchitecture\Util\JwtContext;
-use RestReferenceArchitecture\Util\OpenApiContext;
+use Tutorial\Model\DummyHex;
+use Tutorial\Model\User;
+use Tutorial\Psr11;
+use Tutorial\Repository\DummyHexRepository;
+use Tutorial\Util\JwtContext;
+use Tutorial\Util\OpenApiContext;
 
 class DummyHexRest
 {

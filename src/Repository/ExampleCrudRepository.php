@@ -2,16 +2,18 @@
 
 namespace Tutorial\Repository;
 
-use ByJG\AnyDataset\Db\DbDriverInterface;
+use Tutorial\Psr11;
 use ByJG\MicroOrm\Exception\OrmModelInvalidException;
-use ByJG\MicroOrm\Repository;
 use ReflectionException;
-use Tutorial\Model\DummyHex;
+use ByJG\AnyDataset\Db\DbDriverInterface;
+use ByJG\MicroOrm\Query;
+use ByJG\MicroOrm\Repository;
+use Tutorial\Model\ExampleCrud;
 
-class DummyHexRepository extends BaseRepository
+class ExampleCrudRepository extends BaseRepository
 {
     /**
-     * DummyHexRepository constructor.
+     * ExampleCrudRepository constructor.
      *
      * @param DbDriverInterface $dbDriver
      * @throws OrmModelInvalidException
@@ -19,7 +21,7 @@ class DummyHexRepository extends BaseRepository
      */
     public function __construct(DbDriverInterface $dbDriver)
     {
-        $this->repository = new Repository($dbDriver, DummyHex::class);
+        $this->repository = new Repository($dbDriver, ExampleCrud::class);
     }
 
 

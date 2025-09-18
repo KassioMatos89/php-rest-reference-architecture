@@ -5,10 +5,13 @@ namespace Test\Rest;
 use ByJG\RestServer\Exception\Error401Exception;
 use ByJG\RestServer\Exception\Error403Exception;
 use ByJG\Serializer\ObjectCopy;
-use Tutorial\Model\Dummy;
+use Tutorial\Psr11;
+use Tutorial\Repository\ExampleCrudRepository;
 use Tutorial\Util\FakeApiRequester;
+use Tutorial\Model\ExampleCrud;
+use Tutorial\Repository\BaseRepository;
 
-class DummyTest extends BaseApiTestCase
+class ExampleCrudTest extends BaseApiTestCase
 {
     protected function setUp(): void
     {
@@ -16,20 +19,23 @@ class DummyTest extends BaseApiTestCase
     }
 
     /**
-     * @return Dummy|array
+     * @return ExampleCrud|array
      */
     protected function getSampleData($array = false)
     {
         $sample = [
 
-            'field' => 'field',
+            'name' => 'name',
+            'birthdate' => '2023-01-01 00:00:00',
+            'code' => 1,
+            'status' => 'status',
         ];
 
         if ($array) {
             return $sample;
         }
 
-        ObjectCopy::copy($sample, $model = new Dummy());
+        ObjectCopy::copy($sample, $model = new ExampleCrud());
         return $model;
     }
 
@@ -44,7 +50,7 @@ class DummyTest extends BaseApiTestCase
         $request
             ->withPsr7Request($this->getPsr7Request())
             ->withMethod('GET')
-            ->withPath("/dummy/1")
+            ->withPath("/example/crud/1")
             ->assertResponseCode(401)
         ;
         $this->assertRequest($request);
@@ -59,7 +65,7 @@ class DummyTest extends BaseApiTestCase
         $request
             ->withPsr7Request($this->getPsr7Request())
             ->withMethod('GET')
-            ->withPath("/dummy/1")
+            ->withPath("/example/crud/1")
             ->assertResponseCode(401)
         ;
         $this->assertRequest($request);
@@ -74,7 +80,7 @@ class DummyTest extends BaseApiTestCase
         $request
             ->withPsr7Request($this->getPsr7Request())
             ->withMethod('POST')
-            ->withPath("/dummy")
+            ->withPath("/example/crud")
             ->withRequestBody(json_encode($this->getSampleData(true)))
             ->assertResponseCode(401)
         ;
@@ -90,7 +96,7 @@ class DummyTest extends BaseApiTestCase
         $request
             ->withPsr7Request($this->getPsr7Request())
             ->withMethod('PUT')
-            ->withPath("/dummy")
+            ->withPath("/example/crud")
             ->withRequestBody(json_encode($this->getSampleData(true) + ['id' => 1]))
             ->assertResponseCode(401)
         ;
@@ -108,7 +114,7 @@ class DummyTest extends BaseApiTestCase
         $request
             ->withPsr7Request($this->getPsr7Request())
             ->withMethod('POST')
-            ->withPath("/dummy")
+            ->withPath("/example/crud")
             ->withRequestBody(json_encode($this->getSampleData(true)))
             ->assertResponseCode(403)
             ->withRequestHeader([
@@ -129,7 +135,7 @@ class DummyTest extends BaseApiTestCase
         $request
             ->withPsr7Request($this->getPsr7Request())
             ->withMethod('PUT')
-            ->withPath("/dummy")
+            ->withPath("/example/crud")
             ->withRequestBody(json_encode($this->getSampleData(true) + ['id' => 1]))
             ->assertResponseCode(403)
             ->withRequestHeader([
@@ -147,7 +153,7 @@ class DummyTest extends BaseApiTestCase
         $request
             ->withPsr7Request($this->getPsr7Request())
             ->withMethod('POST')
-            ->withPath("/dummy")
+            ->withPath("/example/crud")
             ->withRequestBody(json_encode($this->getSampleData(true)))
             ->assertResponseCode(200)
             ->withRequestHeader([
@@ -161,7 +167,7 @@ class DummyTest extends BaseApiTestCase
         $request
             ->withPsr7Request($this->getPsr7Request())
             ->withMethod('GET')
-            ->withPath("/dummy/" . $bodyAr['id'])
+            ->withPath("/example/crud/" . $bodyAr['id'])
             ->assertResponseCode(200)
             ->withRequestHeader([
                 "Authorization" => "Bearer " . $result['token']
@@ -173,7 +179,7 @@ class DummyTest extends BaseApiTestCase
         $request
             ->withPsr7Request($this->getPsr7Request())
             ->withMethod('PUT')
-            ->withPath("/dummy")
+            ->withPath("/example/crud")
             ->withRequestBody($body->getBody()->getContents())
             ->assertResponseCode(200)
             ->withRequestHeader([
@@ -191,12 +197,49 @@ class DummyTest extends BaseApiTestCase
         $request
             ->withPsr7Request($this->getPsr7Request())
             ->withMethod('GET')
-            ->withPath("/dummy")
+            ->withPath("/example/crud")
             ->assertResponseCode(200)
             ->withRequestHeader([
                 "Authorization" => "Bearer " . $result['token']
             ])
         ;
         $this->assertRequest($request);
+    }
+
+    public function testUpdateStatus()
+    {
+        $authResult = json_decode(
+            $this->assertRequest(Credentials::requestLogin(Credentials::getAdminUser()))
+                ->getBody()
+                ->getContents(),
+            true
+        );
+
+        $recordId = 1;
+        $newStatus = 'new status';
+
+        // Create mock API request
+        $request = new FakeApiRequester();
+        $request
+            ->withPsr7Request($this->getPsr7Request())
+            ->withMethod('PUT')
+            ->withPath("/example/crud/status")
+            ->withRequestBody(json_encode([
+                'id' => $recordId,
+                'status' => $newStatus
+            ]))
+            ->withRequestHeader([
+                "Authorization" => "Bearer " . $authResult['token'],
+                "Content-Type" => "application/json"
+            ])
+            ->assertResponseCode(200);
+
+        // Execute the request and get response
+        $this->assertRequest($request);
+
+        // Verify the database was updated correctly
+        $repository = Psr11::get(ExampleCrudRepository::class);
+        $updatedRecord = $repository->get($recordId);
+        $this->assertEquals($newStatus, $updatedRecord->getStatus());
     }
 }

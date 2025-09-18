@@ -11,7 +11,7 @@ return [
     BaseCacheEngine::class => DI::bind(FileSystemCacheEngine::class)->toSingleton(),
 
     JwtKeyInterface::class => DI::bind(JwtHashHmacSecret::class)
-        ->withConstructorArgs(['jwt_super_secret_key'])
+        ->withConstructorArgs(['bDwPbUkie/gW9TBURp+XJLk9GnFq0Q4afHqMK4yYT3FBriA86Apo9fM7Kw4QneEvQ2nyS3D0n7CyT+9nwsADDg=='])
         ->toSingleton(),
 
 ];

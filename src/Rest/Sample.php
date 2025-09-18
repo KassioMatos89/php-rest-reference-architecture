@@ -1,6 +1,6 @@
 <?php
 
-namespace RestReferenceArchitecture\Rest;
+namespace Tutorial\Rest;
 
 use ByJG\RestServer\HttpRequest;
 use ByJG\RestServer\HttpResponse;

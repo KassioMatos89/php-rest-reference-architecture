@@ -1,6 +1,6 @@
 <?php
 
-namespace RestReferenceArchitecture\Model;
+namespace Tutorial\Model;
 
 use ByJG\MicroOrm\Attributes\FieldAttribute;
 use ByJG\MicroOrm\Attributes\FieldUuidAttribute;
@@ -10,7 +10,7 @@ use OpenApi\Attributes as OA;
 
 /**
  * Class DummyHex
- * @package RestReferenceArchitecture\Model
+ * @package Tutorial\Model
  */
 #[OA\Schema(required: ["id", "field"], type: "object", xml: new OA\Xml(name: "DummyHex"))]
 #[TableMySqlUuidPKAttribute("dummyhex")]
