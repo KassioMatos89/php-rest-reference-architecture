@@ -46,6 +46,12 @@ class ExampleCrud
     #[FieldAttribute(fieldName: "code")]
     protected int|null $code = null;
 
+    /**
+     * @var string|null
+     */
+    #[OA\Property(type: "string", format: "string", nullable: true)]
+    protected ?string $status = null;
+
 
 
     /**
@@ -120,5 +126,21 @@ class ExampleCrud
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
 
+    /**
+     * @param string|null $status
+     * @return ExampleCrud
+     */
+    public function setStatus(?string $status): ExampleCrud
+    {
+        $this->status = $status;
+        return $this;
+    }
 }
