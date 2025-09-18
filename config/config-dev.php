@@ -31,6 +31,7 @@ use Tutorial\Model\User;
 use Tutorial\Psr11;
 use Tutorial\Repository\DummyHexRepository;
 use Tutorial\Repository\DummyRepository;
+use Tutorial\Repository\ExampleCrudRepository;
 use Tutorial\Repository\UserDefinition as UserDefinitionAlias;
 
 return [
@@ -75,6 +76,10 @@ return [
         ->toSingleton(),
 
     DummyHexRepository::class => DI::bind(DummyHexRepository::class)
+        ->withInjectedConstructor()
+        ->toSingleton(),
+
+    ExampleCrudRepository::class => DI::bind(ExampleCrudRepository::class)
         ->withInjectedConstructor()
         ->toSingleton(),
 
