@@ -1,12 +1,12 @@
 <?php
 
-namespace RestReferenceArchitecture\Repository;
+namespace Tutorial\Repository;
 
 use ByJG\AnyDataset\Db\DbDriverInterface;
 use ByJG\MicroOrm\Exception\OrmModelInvalidException;
 use ByJG\MicroOrm\Repository;
 use ReflectionException;
-use RestReferenceArchitecture\Model\DummyHex;
+use Tutorial\Model\DummyHex;
 
 class DummyHexRepository extends BaseRepository
 {

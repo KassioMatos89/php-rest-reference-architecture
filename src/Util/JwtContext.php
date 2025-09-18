@@ -1,6 +1,6 @@
 <?php
 
-namespace RestReferenceArchitecture\Util;
+namespace Tutorial\Util;
 
 use ByJG\Config\Exception\ConfigException;
 use ByJG\Config\Exception\ConfigNotFoundException;
@@ -15,8 +15,8 @@ use ByJG\RestServer\HttpRequest;
 use ByJG\RestServer\Middleware\JwtMiddleware;
 use Psr\SimpleCache\InvalidArgumentException;
 use ReflectionException;
-use RestReferenceArchitecture\Model\User;
-use RestReferenceArchitecture\Psr11;
+use Tutorial\Model\User;
+use Tutorial\Psr11;
 
 class JwtContext
 {

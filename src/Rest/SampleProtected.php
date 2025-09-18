@@ -1,6 +1,6 @@
 <?php
 
-namespace RestReferenceArchitecture\Rest;
+namespace Tutorial\Rest;
 
 use ByJG\RestServer\Exception\Error401Exception;
 use ByJG\RestServer\Exception\Error403Exception;
@@ -8,7 +8,7 @@ use ByJG\RestServer\HttpRequest;
 use ByJG\RestServer\HttpResponse;
 use OpenApi\Attributes as OA;
 use Psr\SimpleCache\InvalidArgumentException;
-use RestReferenceArchitecture\Util\JwtContext;
+use Tutorial\Util\JwtContext;
 
 class SampleProtected
 {

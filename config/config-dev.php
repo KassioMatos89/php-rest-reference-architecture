@@ -27,11 +27,11 @@ use ByJG\RestServer\OutputProcessor\JsonCleanOutputProcessor;
 use ByJG\RestServer\Route\OpenApiRouteList;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use RestReferenceArchitecture\Model\User;
-use RestReferenceArchitecture\Psr11;
-use RestReferenceArchitecture\Repository\DummyHexRepository;
-use RestReferenceArchitecture\Repository\DummyRepository;
-use RestReferenceArchitecture\Repository\UserDefinition as UserDefinitionAlias;
+use Tutorial\Model\User;
+use Tutorial\Psr11;
+use Tutorial\Repository\DummyHexRepository;
+use Tutorial\Repository\DummyRepository;
+use Tutorial\Repository\UserDefinition as UserDefinitionAlias;
 
 return [
 
@@ -51,7 +51,7 @@ return [
         ->toSingleton(),
 
     JwtKeyInterface::class => DI::bind(JwtHashHmacSecret::class)
-        ->withConstructorArgs(['jwt_super_secret_key'])
+        ->withConstructorArgs(['/mU+y1rAC4T4tAZy13DF4JAmvL4CaTdOsqboXneJio7SRrQ4K3Jkxk/TxJc4b84UNGryl1IaL+7BvgcsOQr4aw=='])
         ->toSingleton(),
 
     JwtWrapper::class => DI::bind(JwtWrapper::class)

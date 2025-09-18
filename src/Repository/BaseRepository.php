@@ -1,6 +1,6 @@
 <?php
 
-namespace RestReferenceArchitecture\Repository;
+namespace Tutorial\Repository;
 
 use ByJG\AnyDataset\Db\DbDriverInterface;
 use ByJG\Config\Exception\ConfigException;
@@ -19,7 +19,7 @@ use ByJG\MicroOrm\Repository;
 use ByJG\MicroOrm\UpdateConstraint;
 use ByJG\Serializer\Exception\InvalidArgumentException;
 use ReflectionException;
-use RestReferenceArchitecture\Psr11;
+use Tutorial\Psr11;
 
 abstract class BaseRepository
 {

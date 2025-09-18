@@ -19,7 +19,7 @@
                     "Dummyhex"
                 ],
                 "summary": "Get the DummyHex by id",
-                "operationId": "GET::/dummyhex/{id}::RestReferenceArchitecture\\Rest\\DummyHexRest::getDummyHex",
+                "operationId": "GET::/dummyhex/{id}::Tutorial\\Rest\\DummyHexRest::getDummyHex",
                 "parameters": [
                     {
                         "name": "id",
@@ -56,7 +56,7 @@
                     "Dummyhex"
                 ],
                 "summary": "List DummyHex",
-                "operationId": "GET::/dummyhex::RestReferenceArchitecture\\Rest\\DummyHexRest::listDummyHex",
+                "operationId": "GET::/dummyhex::Tutorial\\Rest\\DummyHexRest::listDummyHex",
                 "parameters": [
                     {
                         "name": "page",
@@ -131,7 +131,7 @@
                     "Dummyhex"
                 ],
                 "summary": "Update an existing DummyHex",
-                "operationId": "PUT::/dummyhex::RestReferenceArchitecture\\Rest\\DummyHexRest::putDummyHex",
+                "operationId": "PUT::/dummyhex::Tutorial\\Rest\\DummyHexRest::putDummyHex",
                 "requestBody": {
                     "description": "The object DummyHex to be updated",
                     "required": true,
@@ -169,7 +169,7 @@
                     "Dummyhex"
                 ],
                 "summary": "Create a new DummyHex",
-                "operationId": "POST::/dummyhex::RestReferenceArchitecture\\Rest\\DummyHexRest::postDummyHex",
+                "operationId": "POST::/dummyhex::Tutorial\\Rest\\DummyHexRest::postDummyHex",
                 "requestBody": {
                     "description": "The object DummyHex to be created",
                     "required": true,
@@ -234,7 +234,7 @@
                     "Dummy"
                 ],
                 "summary": "Get the Dummy by id",
-                "operationId": "GET::/dummy/{id}::RestReferenceArchitecture\\Rest\\DummyRest::getDummy",
+                "operationId": "GET::/dummy/{id}::Tutorial\\Rest\\DummyRest::getDummy",
                 "parameters": [
                     {
                         "name": "id",
@@ -271,7 +271,7 @@
                     "Dummy"
                 ],
                 "summary": "List Dummy",
-                "operationId": "GET::/dummy::RestReferenceArchitecture\\Rest\\DummyRest::listDummy",
+                "operationId": "GET::/dummy::Tutorial\\Rest\\DummyRest::listDummy",
                 "parameters": [
                     {
                         "name": "page",
@@ -346,7 +346,7 @@
                     "Dummy"
                 ],
                 "summary": "Update an existing Dummy",
-                "operationId": "PUT::/dummy::RestReferenceArchitecture\\Rest\\DummyRest::putDummy",
+                "operationId": "PUT::/dummy::Tutorial\\Rest\\DummyRest::putDummy",
                 "requestBody": {
                     "description": "The object Dummy to be updated",
                     "required": true,
@@ -384,7 +384,7 @@
                     "Dummy"
                 ],
                 "summary": "Create a new Dummy",
-                "operationId": "POST::/dummy::RestReferenceArchitecture\\Rest\\DummyRest::postDummy",
+                "operationId": "POST::/dummy::Tutorial\\Rest\\DummyRest::postDummy",
                 "requestBody": {
                     "description": "The object Dummy to be created",
                     "required": true,
@@ -449,7 +449,7 @@
                     "Login"
                 ],
                 "summary": "Do login",
-                "operationId": "POST::/login::RestReferenceArchitecture\\Rest\\Login::post",
+                "operationId": "POST::/login::Tutorial\\Rest\\Login::post",
                 "requestBody": {
                     "description": "The Login Data",
                     "required": true,
@@ -519,7 +519,7 @@
                     "Login"
                 ],
                 "summary": "Refresh Token",
-                "operationId": "POST::/refreshtoken::RestReferenceArchitecture\\Rest\\Login::refreshToken",
+                "operationId": "POST::/refreshtoken::Tutorial\\Rest\\Login::refreshToken",
                 "responses": {
                     "200": {
                         "description": "The object rto be created",
@@ -577,7 +577,7 @@
                     "Login"
                 ],
                 "summary": "Initialize the Password Request",
-                "operationId": "POST::/login/resetrequest::RestReferenceArchitecture\\Rest\\Login::postResetRequest",
+                "operationId": "POST::/login/resetrequest::Tutorial\\Rest\\Login::postResetRequest",
                 "requestBody": {
                     "description": "The email to have the password reset",
                     "content": {
@@ -624,7 +624,7 @@
                     "Login"
                 ],
                 "summary": "Initialize the Password Request",
-                "operationId": "POST::/login/confirmcode::RestReferenceArchitecture\\Rest\\Login::postConfirmCode",
+                "operationId": "POST::/login/confirmcode::Tutorial\\Rest\\Login::postConfirmCode",
                 "requestBody": {
                     "description": "The email and code to confirm the password reset",
                     "content": {
@@ -689,7 +689,7 @@
                     "Login"
                 ],
                 "summary": "Initialize the Password Request",
-                "operationId": "POST::/login/resetpassword::RestReferenceArchitecture\\Rest\\Login::postResetPassword",
+                "operationId": "POST::/login/resetpassword::Tutorial\\Rest\\Login::postResetPassword",
                 "requestBody": {
                     "description": "The email and the new password",
                     "content": {
@@ -754,7 +754,7 @@
                     "zz_sample"
                 ],
                 "summary": "Simple ping",
-                "operationId": "GET::/sample/ping::RestReferenceArchitecture\\Rest\\Sample::getPing",
+                "operationId": "GET::/sample/ping::Tutorial\\Rest\\Sample::getPing",
                 "responses": {
                     "200": {
                         "description": "The object",
@@ -784,7 +784,7 @@
                     "zz_sampleprotected"
                 ],
                 "summary": "Sample Ping Only Authenticated",
-                "operationId": "GET::/sampleprotected/ping::RestReferenceArchitecture\\Rest\\SampleProtected::getPing",
+                "operationId": "GET::/sampleprotected/ping::Tutorial\\Rest\\SampleProtected::getPing",
                 "responses": {
                     "200": {
                         "description": "The object",
@@ -829,7 +829,7 @@
                     "zz_sampleprotected"
                 ],
                 "summary": "Sample Ping Only Admin",
-                "operationId": "GET::/sampleprotected/pingadm::RestReferenceArchitecture\\Rest\\SampleProtected::getPingAdm",
+                "operationId": "GET::/sampleprotected/pingadm::Tutorial\\Rest\\SampleProtected::getPingAdm",
                 "responses": {
                     "200": {
                         "description": "The object",

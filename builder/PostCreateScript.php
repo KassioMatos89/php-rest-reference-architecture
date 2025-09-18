@@ -43,7 +43,7 @@ class PostCreateScript
         $contents = file_get_contents($workdir . '/composer.json');
         file_put_contents(
             $workdir . '/composer.json',
-            str_replace('byjg/rest-reference-architecture', $composerName, $contents)
+            str_replace('byjg/memyrest', $composerName, $contents)
         );
 
         // ------------------------------------------------
@@ -88,22 +88,22 @@ class PostCreateScript
         $objects = new RecursiveIteratorIterator($filter);
         foreach ($objects as $name => $object) {
             $contents = file_get_contents($name);
-            if (str_contains($contents, 'RestReferenceArchitecture')) {
+            if (str_contains($contents, 'Tutorial')) {
                 echo "$name\n";
 
                 // Replace inside Quotes
                 $contents = preg_replace(
-                    "/(['\"])RestReferenceArchitecture(.*?['\"])/",
+                    "/(['\"])Tutorial(.*?['\"])/",
                     '$1' . str_replace('\\', '\\\\\\\\', $namespace) . '$2',
                     $contents
                 );
 
                 // Replace reserved name
-                $contents = str_replace('RestReferenceArchitecture', $namespace, $contents);
+                $contents = str_replace('Tutorial', $namespace, $contents);
 
                 // Replace reserved name
                 $contents = str_replace(
-                    'rest-reference-architecture',
+                    'memyrest',
                     str_replace('/', '', $composerName),
                     $contents
                 );

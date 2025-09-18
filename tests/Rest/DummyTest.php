@@ -5,8 +5,8 @@ namespace Test\Rest;
 use ByJG\RestServer\Exception\Error401Exception;
 use ByJG\RestServer\Exception\Error403Exception;
 use ByJG\Serializer\ObjectCopy;
-use RestReferenceArchitecture\Model\Dummy;
-use RestReferenceArchitecture\Util\FakeApiRequester;
+use Tutorial\Model\Dummy;
+use Tutorial\Util\FakeApiRequester;
 
 class DummyTest extends BaseApiTestCase
 {

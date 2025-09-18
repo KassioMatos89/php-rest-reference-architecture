@@ -5,9 +5,9 @@ namespace Test\Rest;
 use ByJG\RestServer\Exception\Error401Exception;
 use ByJG\RestServer\Exception\Error403Exception;
 use ByJG\Serializer\ObjectCopy;
-use RestReferenceArchitecture\Model\DummyHex;
-use RestReferenceArchitecture\Repository\BaseRepository;
-use RestReferenceArchitecture\Util\FakeApiRequester;
+use Tutorial\Model\DummyHex;
+use Tutorial\Repository\BaseRepository;
+use Tutorial\Util\FakeApiRequester;
 
 class DummyHexTest extends BaseApiTestCase
 {

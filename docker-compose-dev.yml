@@ -1,8 +1,8 @@
 version: '3.2'
 services:
   rest:
-    image: resttest:dev
-    container_name: resttest
+    image: myrest:dev
+    container_name: myrest
     build:
       context: .
       dockerfile: docker/Dockerfile

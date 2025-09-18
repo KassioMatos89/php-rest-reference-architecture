@@ -1,5 +1,5 @@
 {
-  "name": "byjg/rest-reference-architecture",
+  "name": "me/myrest",
   "description": "ByJG's Reference Architecture project for RESTFul services in PHP with docker and database integrated",
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -27,7 +27,7 @@
   },
   "autoload": {
     "psr-4": {
-      "RestReferenceArchitecture\\": "src/",
+      "Tutorial\\": "src/",
       "Builder\\": "builder/"
     }
   },
